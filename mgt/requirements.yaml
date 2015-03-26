@@ -15,18 +15,19 @@ stories:
       - key: setter
         description: User can specify up to 255 characters of text as the title for any task.
         unittests:
-          - agenda.test_task_title.Setter.test_simple_title
-          - agenda.test_task_title.Setter.test_long_title
+          - agenda.tests.test_task_title.Setter.test_simple_title
+          - agenda.tests.test_task_title.Setter.test_long_title
       - key: getter
         description: Title of any task can be retrieved from the task.
         unittests:
-          - agenda.test_task_title.Getter.test_simple_title
-          - agenda.test_task_title.Getter.test_long_title
+          - agenda.tests.test_task_title.Getter.test_simple_title
+          - agenda.tests.test_task_title.Getter.test_long_title
       - key: saveRestore
         description: Title of any task is saved and restored with the task in the DB.
         unittests:
-          - agenda.test_task_title.SaveRestore.test_simple_title
-          - agenda.test_task_title.SaveRestore.test_long_title
+          - agenda.tests.test_task_title.SaveRestore.test_simple_title
+          - agenda.tests.test_task_title.SaveRestore.test_long_title
+
   - title: Give a task a duration
     key: task_duration
     author: Brian Mearns
@@ -44,21 +45,21 @@ stories:
           1 through 2147483647 ($2^{31} - 1$), measuring the duration in seconds
           (so up to 67+ years).
         unittests:
-          - agenda.test_task_duration.Setter.test_simple_duration
-          - agenda.test_task_duration.Setter.test_min_duration
-          - agenda.test_task_duration.Setter.test_max_duration
+          - agenda.tests.test_task_duration.Setter.test_simple_duration
+          - agenda.tests.test_task_duration.Setter.test_min_duration
+          - agenda.tests.test_task_duration.Setter.test_max_duration
       - key: getter
         description: Duration of any task can be retrieved from the task.
         unittests:
-          - agenda.test_task_duration.Getter.test_simple_duration
-          - agenda.test_task_duration.Getter.test_min_duration
-          - agenda.test_task_duration.Getter.test_max_duration
+          - agenda.tests.test_task_duration.Getter.test_simple_duration
+          - agenda.tests.test_task_duration.Getter.test_min_duration
+          - agenda.tests.test_task_duration.Getter.test_max_duration
       - key: saveRestore
         description: Duration of any task is saved and restored with the task in the DB.
         unittests:
-          - agenda.test_task_duration.SaveRestore.test_simple_duration
-          - agenda.test_task_duration.SaveRestore.test_min_duration
-          - agenda.test_task_duration.SaveRestore.test_max_duration
+          - agenda.tests.test_task_duration.SaveRestore.test_simple_duration
+          - agenda.tests.test_task_duration.SaveRestore.test_min_duration
+          - agenda.tests.test_task_duration.SaveRestore.test_max_duration
 
   - title: Create a schedule of tasks
     key: create_schedule
@@ -74,8 +75,12 @@ stories:
         will take, and use the schedule during my meeting to help keep
         the meeting on track.
     criteria:
-      - description: User can create a new schedule.
-      - description: User can append tasks to the end of a schedule.
+      - key: createSchedule
+        description: User can create a new schedule.
+      - key: appendTask
+        description: User can append tasks to the end of a schedule, at least 16000 tasks must be supported per schedule.
+      - key: saveRestore
+        description: The complete list of tasks is saved and restored in order with a schedule to the DB.
 
   - title: Insert tasks into schedule.
     key: insert_task
@@ -88,7 +93,8 @@ stories:
         - description: |
             A task can be added to the schedule at any valid index, which includes
             and is limited to the beginning of the list, the end of the list, and
-            in between any two existing tasks.
+            in between any two existing tasks. At least 16000 tasks must be supported
+            per schedule.
 
   - title: Rearrange tasks in a schedule.
     key: rearrange_schedule

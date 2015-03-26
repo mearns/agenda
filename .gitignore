@@ -1,4 +1,8 @@
 
+#Django stuff
+db.sqlite3
+agenda/migrations/*
+
 #Sphinx output
 sphinx/build
 

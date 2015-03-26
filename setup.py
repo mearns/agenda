@@ -33,7 +33,8 @@ setup(
     #Other pypi packages that are dependencies for this package.
     # To specify a particular version, do like 'package (>=1.2.3)'
     requires = [
-        #'docit',
+        'docit',
+        'django-ordered-model (>=0.4.0)',
     ],
 
     #pypi packages that aren't necessarily required by the package, but are
