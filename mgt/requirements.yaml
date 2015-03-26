@@ -1,0 +1,30 @@
+---
+
+stories:
+    -
+        key: minimal
+        title: Minimal schedule construction
+        description:
+            as:         a meeting organizer
+            i_want:     to create a schedule for a meeting
+            so_that:    I can plan out my meeting and determine how long the meeting needs to be.
+        criteria:
+            - title: Tasks
+              description:  A meeting has a sequence of tasks.
+            - title: Title
+              description:  Tasks have user configurable titles.
+            - title: Duration
+              description:  Tasks have user configurable durations.
+        variants:
+            - title: Programattic
+              criteria:
+                - title: Tasks
+                  unittests:
+                    - agenda.test_minimal.MinimalProgrammaticTests.test_criteria_tasks
+            - title: Web
+            - title: Web API
+
+
+
+...
+
