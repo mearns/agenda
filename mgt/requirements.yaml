@@ -1,81 +1,108 @@
 ---
 
 stories:
-    -
-        title: Give a task a title
-        key: task_title
-        author: Brian Mearns
-        sponsors:
-            - name: Brian Mearns
-              stamp: 2015-03-26 11:24:20
-        description:
-            as:         a meeting organizer
-            i_want:     to specify titles for tasks
-            so_that:    I can identify tasks
-        criteria:
-            - key: setter
-              description: User can specify up to 255 characters of text as the title for any task.
-              unittests:
-                - agenda.test_task_title.Setter.test_simple_title
-                - agenda.test_task_title.Setter.test_long_title
-            - key: getter
-              description: Title of any task can be retrieved from the task.
-              unittests:
-                - agenda.test_task_title.Getter.test_simple_title
-                - agenda.test_task_title.Getter.test_long_title
-            - key: saveRestore
-              description: Title of any task is saved and restored with the task in the DB.
-              unittests:
-                - agenda.test_task_title.SaveRestore.test_simple_title
-                - agenda.test_task_title.SaveRestore.test_long_title
-    -
-        title: Give a task a duration
-        key: task_duration
-        author: Brian Mearns
-        sponsors:
-            - name: Brian Mearns
-              stamp: 2015-03-26 11:24:20
-        description:
-            as:         a meeting organizer
-            i_want:     to specify estimated durations for each task
-            so_that:    I can plan out the schedule for my meeting
-        criteria:
-            - key: setter
-              description: |
-                User can specify the duration for any task as any integer value from
-                1 through 2147483647 ($2^{31} - 1$), measuring the duration in seconds
-                (so up to 67+ years).
-              unittests:
-                - agenda.test_task_duration.Setter.test_simple_duration
-                - agenda.test_task_duration.Setter.test_min_duration
-                - agenda.test_task_duration.Setter.test_max_duration
-            - key: getter
-              description: Duration of any task can be retrieved from the task.
-              unittests:
-                - agenda.test_task_duration.Getter.test_simple_duration
-                - agenda.test_task_duration.Getter.test_min_duration
-                - agenda.test_task_duration.Getter.test_max_duration
-            - key: saveRestore
-              description: Duration of any task is saved and restored with the task in the DB.
-              unittests:
-                - agenda.test_task_duration.SaveRestore.test_simple_duration
-                - agenda.test_task_duration.SaveRestore.test_min_duration
-                - agenda.test_task_duration.SaveRestore.test_max_duration
+  - title: Give a task a title
+    key: task_title
+    author: Brian Mearns
+    sponsors:
+      - name: Brian Mearns
+        stamp: 2015-03-26 11:24:20
+    description:
+      as:       a meeting organizer
+      i_want:   to specify titles for tasks
+      so_that:  I can identify tasks
+    criteria:
+      - key: setter
+        description: User can specify up to 255 characters of text as the title for any task.
+        unittests:
+          - agenda.test_task_title.Setter.test_simple_title
+          - agenda.test_task_title.Setter.test_long_title
+      - key: getter
+        description: Title of any task can be retrieved from the task.
+        unittests:
+          - agenda.test_task_title.Getter.test_simple_title
+          - agenda.test_task_title.Getter.test_long_title
+      - key: saveRestore
+        description: Title of any task is saved and restored with the task in the DB.
+        unittests:
+          - agenda.test_task_title.SaveRestore.test_simple_title
+          - agenda.test_task_title.SaveRestore.test_long_title
+  - title: Give a task a duration
+    key: task_duration
+    author: Brian Mearns
+    sponsors:
+      - name: Brian Mearns
+        stamp: 2015-03-26 11:24:20
+    description:
+      as:       a meeting organizer
+      i_want:   to specify estimated durations for each task
+      so_that:  I can plan out the schedule for my meeting
+    criteria:
+      - key: setter
+        description: |
+          User can specify the duration for any task as any integer value from
+          1 through 2147483647 ($2^{31} - 1$), measuring the duration in seconds
+          (so up to 67+ years).
+        unittests:
+          - agenda.test_task_duration.Setter.test_simple_duration
+          - agenda.test_task_duration.Setter.test_min_duration
+          - agenda.test_task_duration.Setter.test_max_duration
+      - key: getter
+        description: Duration of any task can be retrieved from the task.
+        unittests:
+          - agenda.test_task_duration.Getter.test_simple_duration
+          - agenda.test_task_duration.Getter.test_min_duration
+          - agenda.test_task_duration.Getter.test_max_duration
+      - key: saveRestore
+        description: Duration of any task is saved and restored with the task in the DB.
+        unittests:
+          - agenda.test_task_duration.SaveRestore.test_simple_duration
+          - agenda.test_task_duration.SaveRestore.test_min_duration
+          - agenda.test_task_duration.SaveRestore.test_max_duration
 
-    -
-        title: Create a schedule of tasks
-        key: create_schedule
-        author: Brian Mearns
-        sponsors:
-            - name: Brian Mearns
-              stamp: 2015-03-26 11:24:20
-        description:
-            as:         a meeting organizer
-            i_want:     to create a schedule as a sequence of tasks
-            so_that:    |
-                I can plan out my meeting in order to determine how long it
-                will take, and use the schedule during my meeting to help keep
-                the meeting on track.
+  - title: Create a schedule of tasks
+    key: create_schedule
+    author: Brian Mearns
+    sponsors:
+      - name: Brian Mearns
+        stamp: 2015-03-26 11:24:20
+    description:
+      as:       a meeting organizer
+      i_want:   to create a schedule as a sequence of tasks
+      so_that:  |
+        I can plan out my meeting in order to determine how long it
+        will take, and use the schedule during my meeting to help keep
+        the meeting on track.
+    criteria:
+      - description: User can create a new schedule.
+      - description: User can append tasks to the end of a schedule.
+
+  - title: Insert tasks into schedule.
+    key: insert_task
+    description:
+      as:       a meeting organizer
+      i_want:   to insert tasks into an existing schedule
+      so_that:  |
+        I can build meeting schedules more dynamically and easily.
+      criteria:
+        - description: |
+            A task can be added to the schedule at any valid index, which includes
+            and is limited to the beginning of the list, the end of the list, and
+            in between any two existing tasks.
+
+  - title: Rearrange tasks in a schedule.
+    key: rearrange_schedule
+    description:
+      as:       a meeting organizer
+      i_want:   to reorganize the tasks in my schedule
+      so_that:  |
+        I can rearrange my meeting in case I made a mistake of reconsidered
+        the best order.
+    
+
+          
 
 
+
+...
 
